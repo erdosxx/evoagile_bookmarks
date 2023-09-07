@@ -13,8 +13,13 @@ function main {
 
   local TITLE_LIST
   TITLE_LIST=$(get_title_list_by_tag "$TAG" "$BOOKMARKS_FILE")
+
   local TITLE
-  TITLE="$(make_dmenu_selection "$TITLE_LIST")"
+  if [[ $(get_num_of_items "$TITLE_LIST") -eq "1" ]]; then
+    TITLE="$TITLE_LIST"
+  else
+    TITLE="$(make_dmenu_selection "$TITLE_LIST")"
+  fi
 
   local TITLE_QUOT_FIX
   TITLE_QUOT_FIX="$(add_two_back_slashes "$TITLE")"

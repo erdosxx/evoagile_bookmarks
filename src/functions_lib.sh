@@ -21,19 +21,14 @@ remove_head_tail_chars() {
 
 make_dmenu_selection() {
   local LIST_DATA=$1
-  # local BOOKMARKS_FILE=${1:-$HOME/.config/bookmarks/bookmarks.yaml}
-  # DMENU="dmenu -i"
+  # local DMENU="dmenu -i"
   local DMENU="rofi -dmenu -i"
 
   local LINES="-l 20"
   local FONT="-fn Inconsolata-14"
-  local COLORS="-nb #2C323E -nf #9899a0 -sb #BF616A -sf #2C323E"
-  # local TITLE_QUOTATION
+  local COLORS="-nb \#2C323E -nf \#9899a0 -sb \#BF616A -sf \#2C323E"
 
-  # TITLE_QUOTATION=$(get_title_list "$BOOKMARKS_FILE" | $DMENU $LINES $FONT $COLORS)
-  # echo "$TITLE_QUOTATION" | sed 's/"//g'
-  # get_title_list "$BOOKMARKS_FILE" | $DMENU "$LINES" "$FONT" "$COLORS"
-  echo "$LIST_DATA" | $DMENU "$LINES" "$FONT" "$COLORS"
+  echo "$LIST_DATA" | eval "$DMENU $LINES $FONT $COLORS"
 }
 
 find_url_by_title() {
@@ -68,6 +63,14 @@ get_title_list_by_tag() {
   local TITLE_LIST
   TITLE_LIST=$("$YQ" "$SEARCH_CONDITION" "$BOOKMARKS_FILE")
   echo "$TITLE_LIST"
+}
+
+get_num_of_items() {
+  local ITEMS=$1
+  local NUM
+
+  [[ -z "$ITEMS" ]] && NUM="0" || NUM=$(echo "$ITEMS" | wc -l)
+  echo "$NUM"
 }
 
 # \" -> \\\"

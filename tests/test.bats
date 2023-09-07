@@ -142,6 +142,25 @@ double \"quote\" single' Webpage"
 double \"quote\" single' Webpage"
 }
 
+@test "get_num_of_items for title" {
+  run get_num_of_items ""
+  assert_output "0"
+
+  run get_num_of_items "item 1"
+  assert_output "1"
+
+  run get_num_of_items "item 1
+  item 2"
+  assert_output "2"
+
+  run get_num_of_items "item 1
+item 2
+item 3
+item 4
+item 5"
+  assert_output "5"
+}
+
 # @test "Show welcome message on first invocation" {
 #   [[ -e /tmp/bats-tutorial-project-ran ]] && skip 'The FIRST_RUN_FILE already exists'
 #
