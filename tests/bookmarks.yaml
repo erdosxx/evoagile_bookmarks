@@ -1,0 +1,107 @@
+- url: https://www.ejmastnak.com/tutorials/vim-latex/intro/
+  title: Real-time LaTeX using Vim/Neovim, VimTeX, and snippets | ejmastnak
+  tags:
+    - TeX
+- url: https://castel.dev/
+  title: Home | Gilles Castel
+  tags:
+    - TeX
+- url: https://jpedmedia.com/
+  title: Jake@Linux | Focused on Linux and F.O.S.S.
+  tags:
+    - Linux
+- url: https://github.com/jdpedersen1
+  title: jdpedersen1 (Jake@Linux)
+  tags:
+    - Linux
+- url: https://lukesmith.xyz/
+  title: "Luke's Webpage"
+  tags:
+    - Linux
+- url: https://www.chrisatmachine.com/
+  title: chrisatmachine.com
+  tags:
+    - Linux
+- url: https://github.com/sstojkovic/eleg-weather-conky
+  title: 'sstojkovic/eleg-weather-conky: Conky widget to display time and weather'
+  tags:
+    - Linux
+- url: https://www.nordtheme.com/docs/colors-and-palettes
+  title: Nord Color
+  tags:
+    - Linux
+    - UI
+- url: http://172.30.1.254:8899/new/UserFolder/main.asp
+  title: GiGA WiFi home
+  tags:
+    - Home
+- url: https://stackoverflow.com/questions/1218390/what-is-your-most-productive-shortcut-with-vim/1220118#1220118
+  title: vi - What is your most productive shortcut with Vim? - Stack Overflow
+  tags:
+    - Vim
+- url: https://blog.carbonfive.com/vim-text-objects-the-definitive-guide/
+  title: 'Vim Text Objects: The Definitive Guide'
+  tags:
+    - Vim
+- url: https://evesdropper.dev/files/luasnip
+  title: LuaSnip guide
+  tags:
+    - LuaSnip
+- url: https://github.com/gillescastel/latex-snippets/blob/master/tex.snippets
+  title: latex-snippets/tex.snippets at master · gillescastel/latex-snippets
+  tags:
+    - LuaSnip
+- url: https://github.com/minar09/awesome-virtual-try-on
+  title: 'minar09/awesome-virtual-try-on: A curated list of awesome research papers, projects, code, dataset, workshops etc. related to virtual try-on.'
+  tags:
+    - Viton
+    - AI
+- url: https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do
+  title: K-Startup 창업지원포털 사업공고 모집중
+  tags:
+    - Startup
+- url: https://aiconnect.kr/competition/list
+  title: AI CONNECT | AI competition Platform
+  tags:
+    - AI
+- url: https://aifactory.space/competition
+  title: AIFactory
+  tags:
+    - AI
+- url: https://www.challenge.gov/#active-challenges
+  title: Challenge.Gov
+  tags:
+    - AI
+- url: https://healthitanalytics.com/news
+  title: Health IT Analytics and Population Health News - HealthITAnalytics
+  tags:
+    - AI
+    - Healthcare
+- url: https://aihub.or.kr/login/login.do
+  title: AI-Hub
+  tags:
+    - AI
+- url: https://my.bluehost.com/web-hosting/cplogin
+  title: Bluehost
+  tags:
+    - Blog
+- url: https://evoagile.com/
+  title: EvoAgile – Evolutionary agile development and idea
+  tags:
+    - Blog
+- url: https://evoagile.com/wp-admin/
+  title: EvoAgile — Admin
+  tags:
+    - Blog
+- url: https://cpanel-box2276.bluehost.com/cpsess6253128265/frontend/bluehost/email_accounts/index.html?webpro=0&login=1&post_login=28195833935184#/list
+  title: cPanel - Evoagile Email Accounts
+  tags:
+    - Blog
+- url: https://coupang.globalsharesequity.com/en-US/Participant
+  title: Coupang EquityGateway
+  tags:
+    - Coupang
+- url: https://public.irb.or.kr/
+  title: e-IRB
+  tags:
+    - government
