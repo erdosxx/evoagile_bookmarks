@@ -36,14 +36,37 @@ find_url_by_title() {
   local BOOKMARKS_FILE=${2:-$HOME/.config/bookmarks/bookmarks.yaml}
 
   local YQ="$HOME/.local/share/go/bin/yq"
-  # local SEARCH_CONDITION='.[] | select(.title == "'"$TITLE"'") | .url'
-  # local SEARCH_CONDITION="'.[] | select(.title == \"""$TITLE""\") | .url'"
   local SEARCH_CONDITION=".[] | select(.title == \"""$TITLE""\") | .url"
-  # echo "$SEARCH_CONDITION"
 
   local URL_QUOT
   URL_QUOT=$("$YQ" "$SEARCH_CONDITION" "$BOOKMARKS_FILE")
   remove_head_tail_chars "$URL_QUOT"
+}
+
+get_num_url() {
+  local URL=$1
+  local BOOKMARKS_FILE=${2:-$HOME/.config/bookmarks/bookmarks.yaml}
+
+  local YQ="$HOME/.local/share/go/bin/yq"
+  local SEARCH_CONDITION=".[] | select(.url == \"""$URL""\") | .url"
+
+  local URL_QUOT
+  URL_QUOT=$("$YQ" "$SEARCH_CONDITION" "$BOOKMARKS_FILE")
+
+  get_num_of_items "$URL_QUOT"
+}
+
+get_num_title() {
+  local TITLE=$1
+  local BOOKMARKS_FILE=${2:-$HOME/.config/bookmarks/bookmarks.yaml}
+
+  local YQ="$HOME/.local/share/go/bin/yq"
+  local SEARCH_CONDITION=".[] | select(.title == \"""$TITLE""\") | .title"
+
+  local SEARCH_TITLE
+  SEARCH_TITLE=$("$YQ" "$SEARCH_CONDITION" "$BOOKMARKS_FILE")
+
+  get_num_of_items "$SEARCH_TITLE"
 }
 
 get_uniq_tags() {
@@ -73,6 +96,11 @@ get_num_of_items() {
   echo "$NUM"
 }
 
+rm_tail_slash() {
+  local STR=$1
+  echo ${STR%\/}
+}
+
 # \" -> \\\"
 add_two_back_slashes() {
   local STR=$1
@@ -90,18 +118,13 @@ get_selection_url() {
 
 get_input_title() {
   local TITLE
-  # printf "What title?\n"
-  # printf " : "
-  # read -r TITLE
-  read -r -p "title: " TITLE
+  read -r -p "title(to abort 'q!'): " TITLE
+
   echo "$TITLE"
 }
 
 get_input_tags() {
   local TAGS 
-  # printf "Any tags?\n"
-  # printf " : "
-  # read -r TAGS
   read -r -p "tags: " TAGS
   echo "$TAGS"
 }
@@ -117,7 +140,49 @@ add_new_bookmark() {
   local URL=$1
   local TITLE=$2
   local TAGS=$3
+  local BOOKMARKS_FILE=${4:-$HOME/.config/bookmarks/bookmarks.yaml}
   # YQ="/usr/bin/yq"
   local YQ="$HOME/.local/share/go/bin/yq"
-  "$YQ" -i '. + {"url": "'"$URL"'", "title": "'"$TITLE"'", "tags": [ "'"$TAGS"'" ]}' "$BOOKMARKS_FILE"
+  # "$YQ" -i '. + {"url": "'"$URL"'", "title": "'"$TITLE"'", "tags": [ "$TAGS" ]}' "$BOOKMARKS_FILE"
+  "$YQ" '. + {"url": "'"$URL"'", "title": "'"$TITLE"'", "tags": [ '"$TAGS"' ]}' "$BOOKMARKS_FILE"
 }
+
+to_lowercase() {
+  local STR=$1
+  echo "${STR,,}"
+}
+
+trim() {
+    local var="$*"
+    # remove leading whitespace characters
+    var="${var#"${var%%[![:space:]]*}"}"
+    # remove trailing whitespace characters
+    var="${var%"${var##*[![:space:]]}"}"
+    echo "$var"
+}
+
+gen_tags_str() {
+  local TAGS_STR=$1
+  local TAGS_ARRAY
+  local OUT_STR=""
+  local TAG
+
+  if [[ -z "$TAGS_STR" ]]; then 
+    echo ""
+  else
+    TAGS_STR=$(trim "$TAGS_STR")
+    # Remove front ,
+    TAGS_STR=${TAGS_STR#,}
+    # Remove tail ,
+    TAGS_STR=${TAGS_STR%,}
+    readarray -td, TAGS_ARRAY <<<"$TAGS_STR" # ; declare -p TAGS_ARRAY;
+
+    for (( i=0; i<${#TAGS_ARRAY[@]}; i++ )); do
+      TAG=$(trim "${TAGS_ARRAY[i]}")
+      OUT_STR="$OUT_STR"", \"""${TAG}""\""
+    done
+    OUT_STR=${OUT_STR#, }
+    echo "$OUT_STR"
+  fi
+}
+

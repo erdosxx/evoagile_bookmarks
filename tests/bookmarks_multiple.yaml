@@ -1,9 +1,9 @@
-- url: https://castel.dev/
+- url: https://castel.dev
   title: Home | Gilles Castel
   tags:
     - tex
     - note taking
-- url: https://jpedmedia.com/
+- url: https://jpedmedia.com
   title: Jake@Linux | Focused on Linux and F.O.S.S.
   tags:
     - linux
@@ -13,17 +13,17 @@
   tags:
     - github
     - jake
-- url: https://lukesmith.xyz/
+- url: https://lukesmith.xyz
   title: "Luke's Webpage"
   tags:
     - luke
     - linux
     - single quote
-- url: https://doublequote.com/
+- url: https://doublequote.com
   title: double "quote" Webpage
   tags:
     - double quote
-- url: https://doublesinglequote.com/
+- url: https://doublesinglequote.com
   title: double "quote" single' Webpage
   tags:
     - double quote
