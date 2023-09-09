@@ -1,0 +1,46 @@
+Brave: https://search.brave.com/search?q=AI+based+sports+business
+Startpage: https://www.startpage.com/do/search?q=AI+based+sports+business
+You: https://you.com/search?q=AI+based+sports+business
+Qwant: https://www.qwant.com/?q=AI+based+sports+business
+ECOSIA: https://www.ecosia.org/search?q=AI%20based%20sports%20business
+Yandex: https://yandex.com/search/?text=AI+based+sports+business
+Yahoo: https://search.yahoo.com/search/?p=AI+based+sports+business
+Bing: https://www.bing.com/search?q=AI+based+sports+business
+DuckDuckgo: https://duckduckgo.com/?q=AI+based+sports+business
+Google: https://www.google.com/search?q=AI+based+sports+business
+Naver: https://search.naver.com/search.naver?query=AI+based+sports+business
+
+" -> "
+* -> *
+- -> -
+_ -> _
+~ -> ~
+< -> <
+> -> >
+. -> .
++ -> %2B
+' -> %27
+? -> %3F
+! -> %21
+@ -> %40
+# -> %23
+$ -> %24
+% -> %25
+^ -> %5E
+& -> %26
+( -> %28
+) -> %29
+= -> %3D
+{ -> %7B
+} -> %7D
+[ -> %5B
+] -> %5D
+~ -> %7E
+` -> %60
+| -> %7C
+\ -> %5C
+: -> %3A
+; -> %3B
+, -> %2C
+
+

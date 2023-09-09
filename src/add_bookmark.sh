@@ -13,7 +13,7 @@ function main {
   local TAGS
   local TAGS_STR
 
-  URL_INPUT="$(get_selection_url)"
+  URL_INPUT="$(get_clip_str)"
   echo "URL: $URL_INPUT"
 
   URL=$(rm_tail_slash "$URL_INPUT")

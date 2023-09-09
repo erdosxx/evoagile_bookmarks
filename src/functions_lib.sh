@@ -21,14 +21,17 @@ remove_head_tail_chars() {
 
 make_dmenu_selection() {
   local LIST_DATA=$1
-  # local DMENU="dmenu -i"
-  local DMENU="rofi -dmenu -i"
+  local PROMPT=$2
 
   local LINES="-l 20"
   local FONT="-fn Inconsolata-14"
   local COLORS="-nb \#2C323E -nf \#9899a0 -sb \#BF616A -sf \#2C323E"
 
-  echo "$LIST_DATA" | eval "$DMENU $LINES $FONT $COLORS"
+  if [[ -z "$PROMPT" ]]; then
+    echo "$LIST_DATA" | rofi -dmenu -i  "$LINES" "$FONT" "$COLORS"
+  else
+    echo "$LIST_DATA" | rofi -dmenu -i  "$LINES" "$FONT" "$COLORS" -p "$PROMPT"
+  fi
 }
 
 find_url_by_title() {
@@ -109,11 +112,11 @@ add_two_back_slashes() {
   echo "$OUTPUT"
 }
 
-get_selection_url() {
-  local URL
+get_clip_str() {
+  local STR
 
-  URL=$(xclip -o)
-  echo "$URL"
+  STR=$(xclip -o)
+  echo "$STR"
 }
 
 get_input_title() {
@@ -184,5 +187,10 @@ gen_tags_str() {
     OUT_STR=${OUT_STR#, }
     echo "$OUT_STR"
   fi
+}
+
+gen_search_str() {
+  local STR=$1
+  jq --raw-input --raw-output @uri <<<"$STR"
 }
 
