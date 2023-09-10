@@ -1,12 +1,6 @@
 setup() {
-  load '/usr/share/bats-support/load'
-  load '/usr/share/bats-assert/load'
-  # get the containing directory of this file
-  # use $BATS_TEST_FILENAME instead of ${BASH_SOURCE[0]} or $0,
-  # as those will point to the bats executable's location or the preprocessed file respectively
-  DIR="$( cd "$( dirname "$BATS_TEST_FILENAME" )" >/dev/null 2>&1 && pwd )"
-  # make executables in src/ visible to PATH
-  PATH="$DIR/../src:$PATH"
+  load 'test_helper/common-setup'
+  _common_setup
 
   source functions_lib.sh
 }
@@ -47,7 +41,8 @@ Jake@Linux | Focused on Linux and F.O.S.S.
 jdpedersen1 (Jake@Linux)
 Luke's Webpage
 double \"quote\" Webpage
-double \"quote\" single' Webpage"
+double \"quote\" single' Webpage
+gmail account for evoagile"
 }
 
 @test "find_url_by_title for normal title 1" {
@@ -118,12 +113,14 @@ double \"quote\" single' Webpage"
 
 @test "get_uniq_tags for normal bookmarks" {
   run get_uniq_tags tests/bookmarks_multiple.yaml
-  assert_output "double quote
+  assert_output "cmd
+double quote
 github
 jake
 linux
 luke
 note taking
+pass
 single quote
 tex
 web site"
@@ -313,4 +310,24 @@ tags:
   title: title
   tags:
     - tag"
+}
+
+@test "check_cmd_type" {
+  run check_tag "Home | Gilles Castel" "cmd" tests/bookmarks_multiple.yaml
+  assert_output "no"
+
+  run check_tag "Home | Gilles Castel" "tex" tests/bookmarks_multiple.yaml
+  assert_output "yes"
+
+  run check_tag "Home | Gilles Castel" "note taking" tests/bookmarks_multiple.yaml
+  assert_output "yes"
+
+  run check_tag "gmail account for evoagile" "cmd" tests/bookmarks_multiple.yaml
+  assert_output "yes"
+
+  run check_tag "gmail account for evoagile" "pass" tests/bookmarks_multiple.yaml
+  assert_output "yes"
+
+  run check_tag "gmail account for evoagile" "wrong tag" tests/bookmarks_multiple.yaml
+  assert_output "no"
 }

@@ -22,7 +22,7 @@ function main {
   URL="$(find_url_by_title "$SEARCH_ENGINE" "$SEARCH_URL_FILE")"
 
   # Auto type URL
-  xdotool type "$URL""$SEARCH_STR"
+  open_new_web_url "$URL""$SEARCH_STR"
 }
 
 SEARCH_URL_FILE="$HOME/.config/bookmarks/search_url.yaml"

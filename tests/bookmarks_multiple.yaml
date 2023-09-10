@@ -28,3 +28,8 @@
   tags:
     - double quote
     - single quote
+- url: pass email/gmail/id1
+  title: gmail account for evoagile
+  tags:
+    - cmd
+    - pass

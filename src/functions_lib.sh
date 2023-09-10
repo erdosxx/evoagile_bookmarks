@@ -194,3 +194,29 @@ gen_search_str() {
   jq --raw-input --raw-output @uri <<<"$STR"
 }
 
+check_tag() {
+  local TITLE=$1
+  local TAG=$2
+  local BOOKMARKS_FILE=${3:-$HOME/.config/bookmarks/bookmarks.yaml}
+  local YQ="$HOME/.local/share/go/bin/yq"
+
+  local SEARCH_CONDITION=".[] | select(.title == \"""$TITLE""\" and .tags[] == \"""$TAG""\") | .url"
+
+  local URL_QUOT
+  URL_QUOT=$("$YQ" "$SEARCH_CONDITION" "$BOOKMARKS_FILE")
+  local URL
+  URL=$(remove_head_tail_chars "$URL_QUOT")
+
+  [[ -z "$URL" ]] && echo "no" || echo "yes"
+}
+
+open_new_web_url() {
+  local URL=$1
+
+  local OPEN_INPUT="o"
+  xdotool key Escape
+  xdotool type "$OPEN_INPUT"
+  sleep 0.2
+  xdotool type "$URL"
+  xdotool key Return
+}
