@@ -132,22 +132,22 @@ get_input_tags() {
   echo "$TAGS"
 }
 
-backup_bookmarks() {
+backup_file() {
   local SOURCE=$1
   local BACKUP_FILE=$2
-  # cp "$BOOKMARKS_FILE" "$BOOKMARKS_BAK_FILE"
+
   cp "$SOURCE" "$BACKUP_FILE"
 }
 
-add_new_bookmark() {
+add_new_entry() {
   local URL=$1
   local TITLE=$2
   local TAGS=$3
-  local BOOKMARKS_FILE=${4:-$HOME/.config/bookmarks/bookmarks.yaml}
+  local FILE=${4:-$HOME/.config/bookmarks/bookmarks.yaml}
   # YQ="/usr/bin/yq"
   local YQ="$HOME/.local/share/go/bin/yq"
   # "$YQ" -i '. + {"url": "'"$URL"'", "title": "'"$TITLE"'", "tags": [ "$TAGS" ]}' "$BOOKMARKS_FILE"
-  "$YQ" '. + {"url": "'"$URL"'", "title": "'"$TITLE"'", "tags": [ '"$TAGS"' ]}' "$BOOKMARKS_FILE"
+  "$YQ" '. + {"url": "'"$URL"'", "title": "'"$TITLE"'", "tags": [ '"$TAGS"' ]}' "$FILE"
 }
 
 to_lowercase() {

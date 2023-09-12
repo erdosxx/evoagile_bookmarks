@@ -6,7 +6,7 @@ source "$SRC_DIR"/functions_lib.sh
 BOOKMARKS_FILE="$HOME/.config/bookmarks/bookmarks.yaml"
 BOOKMARKS_BAK_FILE="$HOME/.config/bookmarks/bookmarks.yaml.bak"
 
-function main {
+main() {
   local URL_INPUT
   local URL
   local TITLE
@@ -36,10 +36,10 @@ function main {
   TAGS="$(get_input_tags)"
   TAGS_STR=$(gen_tags_str "$TAGS")
 
-  backup_bookmarks "$BOOKMARKS_FILE" "$BOOKMARKS_BAK_FILE" 
+  backup_file "$BOOKMARKS_FILE" "$BOOKMARKS_BAK_FILE" 
 
   # echo "$(add_new_bookmark "$URL" "$TITLE" "$TAGS_STR" "$BOOKMARKS_BAK_FILE")" > "$BOOKMARKS_FILE"
-  add_new_bookmark "$URL" "$TITLE" "$TAGS_STR" "$BOOKMARKS_BAK_FILE" > "$BOOKMARKS_FILE"
+  add_new_entry "$URL" "$TITLE" "$TAGS_STR" "$BOOKMARKS_BAK_FILE" > "$BOOKMARKS_FILE"
 }
 
 main

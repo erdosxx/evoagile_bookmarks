@@ -4,7 +4,7 @@ SRC_DIR=$(dirname "$0")
 source "$SRC_DIR"/functions_lib.sh
 
 function main {
-  local BOOKMARKS_FILE=${1:-$HOME/.config/bookmarks/bookmarks.yaml}
+  local BOOKMARKS_FILE=${1:-$HOME/.config/bookmarks/commands.yaml}
 
   local TITLE_LIST
   TITLE_LIST=$(get_title_list "$BOOKMARKS_FILE")
@@ -16,11 +16,11 @@ function main {
   local TITLE_QUOT_FIX
   TITLE_QUOT_FIX="$(add_two_back_slashes "$TITLE")"
 
-  local URL
-  URL="$(find_url_by_title "$TITLE_QUOT_FIX" "$BOOKMARKS_FILE")"
+  local CMD
+  CMD="$(find_url_by_title "$TITLE_QUOT_FIX" "$BOOKMARKS_FILE")"
 
-  open_new_web_url "$URL"
+  xdotool type "$CMD"
 }
 
-BOOKMARKS_FILE="$HOME/.config/bookmarks/bookmarks.yaml"
+BOOKMARKS_FILE="$HOME/.config/bookmarks/commands.yaml"
 main "${1:-"$BOOKMARKS_FILE"}"

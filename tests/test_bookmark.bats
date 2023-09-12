@@ -287,21 +287,21 @@ item 5"
   assert_output "\"a tag\", \"b & c tag\", \"d tag\""
 }
 
-@test "add_new_bookmark" {
-  run add_new_bookmark "https://url" "title" "\"tag\"" tests/null_bookmarks.yaml
+@test "add_new_entry" {
+  run add_new_entry "https://url" "title" "\"tag\"" tests/null_bookmarks.yaml
   assert_output "url: https://url
 title: title
 tags:
   - tag"
 
-  run add_new_bookmark "https://url" "title" "\"tag1\", \"tag2\"" tests/null_bookmarks.yaml
+  run add_new_entry "https://url" "title" "\"tag1\", \"tag2\"" tests/null_bookmarks.yaml
   assert_output "url: https://url
 title: title
 tags:
   - tag1
   - tag2"
 
-  run add_new_bookmark "https://url" "title" "\"tag\"" tests/bookmarks_one_normal.yaml
+  run add_new_entry "https://url" "title" "\"tag\"" tests/bookmarks_one_normal.yaml
   assert_output "- url: https://vim-latex
   title: Real-time
   tags:
