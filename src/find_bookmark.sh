@@ -3,7 +3,7 @@
 SRC_DIR=$(dirname "$0")
 source "$SRC_DIR"/functions_lib.sh
 
-function main {
+main() {
   local BOOKMARKS_FILE=${1:-$HOME/.config/bookmarks/bookmarks.yaml}
 
   local TITLE_LIST

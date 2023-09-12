@@ -3,7 +3,7 @@
 SRC_DIR=$(dirname "$0")
 source "$SRC_DIR"/functions_lib.sh
 
-function main {
+main() {
   local SEARCH_INPUT_STR
   SEARCH_INPUT_STR="$(get_clip_str)"
 
