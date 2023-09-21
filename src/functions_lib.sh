@@ -24,13 +24,16 @@ make_dmenu_selection() {
   local PROMPT=$2
 
   local LINES="-l 20"
-  local FONT="-fn Inconsolata-14"
+  # Font is contralled by rofi config.rasi file
+  # local FONT="-fn Inconsolata-16"
   local COLORS="-nb \#2C323E -nf \#9899a0 -sb \#BF616A -sf \#2C323E"
 
   if [[ -z "$PROMPT" ]]; then
-    echo "$LIST_DATA" | rofi -dmenu -i  "$LINES" "$FONT" "$COLORS"
+    # echo "$LIST_DATA" | rofi -dmenu -i  "$LINES" "$FONT" "$COLORS"
+    echo "$LIST_DATA" | rofi -dmenu -i  -matching fuzzy "$LINES" "$COLORS"
   else
-    echo "$LIST_DATA" | rofi -dmenu -i  "$LINES" "$FONT" "$COLORS" -p "$PROMPT"
+    # echo "$LIST_DATA" | rofi -dmenu -i  "$LINES" "$FONT" "$COLORS" -p "$PROMPT"
+    echo "$LIST_DATA" | rofi -dmenu -i  -matching fuzzy "$LINES" "$COLORS" -p "$PROMPT"
   fi
 }
 
