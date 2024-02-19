@@ -220,6 +220,7 @@ open_new_web_url() {
   xdotool key Escape
   xdotool type "$OPEN_INPUT"
   sleep 0.2
-  xdotool type "$URL"
+  echo -n "$URL" | xclip -selection clipboard
+  xdotool key Ctrl+v
   xdotool key Return
 }
