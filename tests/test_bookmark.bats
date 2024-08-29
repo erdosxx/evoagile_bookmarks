@@ -2,7 +2,7 @@ setup() {
   load 'test_helper/common-setup'
   _common_setup
 
-  source functions_lib.sh
+  source "$PROJECT_ROOT"/src/functions_lib.sh
 }
 
 teardown() {
@@ -51,23 +51,27 @@ gmail account for evoagile"
 }
 
 @test "find_url_by_title for normal title 2" {
-  run find_url_by_title "jdpedersen1 (Jake@Linux)" tests/bookmarks_multiple.yaml
+  run find_url_by_title "jdpedersen1 (Jake@Linux)" \
+    tests/bookmarks_multiple.yaml
   assert_output "https://github.com/jdpedersen1"
 }
 
 @test "find_url_by_title for double quote title" {
-  run find_url_by_title "Real-time \\\"LaTeX\\\" engine" tests/bookmarks_one_double_quote.yaml
+  run find_url_by_title "Real-time \\\"LaTeX\\\" engine" \
+    tests/bookmarks_one_double_quote.yaml
 
   assert_output "https://www.ejmastnak.com/tutorials/vim-latex/intro"
 }
 
 @test "find_rul_by_title for single quote title" {
-  run find_url_by_title "What's most important thing" tests/bookmarks_one_single_quote.yaml
+  run find_url_by_title "What's most important thing" \
+    tests/bookmarks_one_single_quote.yaml
   assert_output "https://www.ejmastnak.com/tutorials/vim-latex/intro"
 }
 
 @test "find_url_by_title for one single and double quote title" {
-  run find_url_by_title "You're the only one, last \\\"forever\\\"." tests/bookmarks_one_single_double_quote.yaml
+  run find_url_by_title "You're the only one, last \\\"forever\\\"." \
+    tests/bookmarks_one_single_double_quote.yaml
 
   assert_output "https://www.ejmastnak.com/tutorials/vim-latex/intro"
 }
@@ -162,7 +166,8 @@ item 5"
   run get_num_url "https://castel.dev" tests/bookmarks_multiple.yaml
   assert_output "1"
 
-  run get_num_url "https://doublesinglequote.com/" tests/bookmarks_multiple.yaml
+  run get_num_url "https://doublesinglequote.com/" \
+    tests/bookmarks_multiple.yaml
   assert_output "0"
 
   run get_num_url "https://doublesinglequote.com" tests/bookmarks_multiple.yaml
@@ -294,14 +299,16 @@ title: title
 tags:
   - tag"
 
-  run add_new_entry "https://url" "title" "\"tag1\", \"tag2\"" tests/null_bookmarks.yaml
+  run add_new_entry "https://url" "title" "\"tag1\", \"tag2\"" \
+    tests/null_bookmarks.yaml
   assert_output "url: https://url
 title: title
 tags:
   - tag1
   - tag2"
 
-  run add_new_entry "https://url" "title" "\"tag\"" tests/bookmarks_one_normal.yaml
+  run add_new_entry "https://url" "title" "\"tag\"" \
+    tests/bookmarks_one_normal.yaml
   assert_output "- url: https://vim-latex
   title: Real-time
   tags:
@@ -319,15 +326,19 @@ tags:
   run check_tag "Home | Gilles Castel" "tex" tests/bookmarks_multiple.yaml
   assert_output "yes"
 
-  run check_tag "Home | Gilles Castel" "note taking" tests/bookmarks_multiple.yaml
+  run check_tag "Home | Gilles Castel" "note taking" \
+    tests/bookmarks_multiple.yaml
   assert_output "yes"
 
-  run check_tag "gmail account for evoagile" "cmd" tests/bookmarks_multiple.yaml
+  run check_tag "gmail account for evoagile" "cmd" \
+    tests/bookmarks_multiple.yaml
   assert_output "yes"
 
-  run check_tag "gmail account for evoagile" "pass" tests/bookmarks_multiple.yaml
+  run check_tag "gmail account for evoagile" "pass" \
+    tests/bookmarks_multiple.yaml
   assert_output "yes"
 
-  run check_tag "gmail account for evoagile" "wrong tag" tests/bookmarks_multiple.yaml
+  run check_tag "gmail account for evoagile" "wrong tag" \
+    tests/bookmarks_multiple.yaml
   assert_output "no"
 }
