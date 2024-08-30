@@ -175,7 +175,20 @@ item 5"
 
   run get_num_url "https://non.exist.url/" tests/bookmarks_multiple.yaml
   assert_output "0"
+
 }
+
+@test "check double quote in CMD" {
+  run check_double_quote ""
+  assert_output "0"
+
+  run check_double_quote '"'
+  assert_output "1"
+
+  run check_double_quote 'nix flake "nixpkgs#julia"'
+  assert_output "2"
+}
+
 
 @test "rm_tail_slash" {
   run rm_tail_slash ""
@@ -317,6 +330,14 @@ tags:
   title: title
   tags:
     - tag"
+
+  run add_new_entry "nix shell "nixpkgs#julia"" "title" "\"tag1\", \"tag2\"" \
+    tests/null_bookmarks.yaml
+  assert_output "url: nix shell "nixpkgs#julia"
+title: title
+tags:
+  - tag1
+  - tag2"
 }
 
 @test "check_cmd_type" {

@@ -13,10 +13,14 @@ main() {
   local TAGS
   local TAGS_STR
 
-  CMD_INPUT="$(get_clip_str)"
-  echo "CMD: $CMD_INPUT"
+  CMD="$(get_clip_str)"
+  echo "CMD: $CMD"
 
-  CMD=$(rm_tail_slash "$CMD_INPUT")
+  if [[ $(check_double_quote "$CMD") -ne "0" ]]; then
+    echo 'The CMD contains " character. Use '\'' instead.'
+    sleep 2
+    exit
+  fi
 
   if [[ $(get_num_url "$CMD" "$CMD_FILE") -ne "0" ]]; then
     echo "The CMD is already exist in commands file."

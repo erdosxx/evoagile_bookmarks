@@ -5,3 +5,6 @@ dev:
 
 test:
   bats tests
+
+up:
+  nix flake update

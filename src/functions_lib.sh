@@ -213,6 +213,13 @@ check_tag() {
   [[ -z "$URL" ]] && echo "no" || echo "yes"
 }
 
+check_double_quote() {
+  local STR=$1
+  local NUM
+  NUM=$(echo "$STR" | grep -o '"' | wc -l)
+  echo "$NUM"
+}
+
 open_new_web_url() {
   local URL=$1
 
@@ -223,4 +230,12 @@ open_new_web_url() {
   echo -n "$URL" | xclip -selection clipboard
   xdotool key Ctrl+v
   xdotool key Return
+}
+
+command_paste() {
+  local CMD=$1
+
+  echo -n "$CMD" | xclip -selection clipboard
+  # Alt+v should be paste command in terminal
+  xdotool key Alt+v
 }

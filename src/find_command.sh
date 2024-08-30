@@ -19,7 +19,8 @@ main() {
   local CMD
   CMD="$(find_url_by_title "$TITLE_QUOT_FIX" "$BOOKMARKS_FILE")"
 
-  xdotool type "$CMD"
+  # xdotool type "$CMD"
+  command_paste "$CMD"
 }
 
 BOOKMARKS_FILE="$HOME/.config/bookmarks/commands.yaml"
