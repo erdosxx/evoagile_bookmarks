@@ -40,9 +40,9 @@ main() {
   TAGS="$(get_input_tags)"
   TAGS_STR=$(gen_tags_str "$TAGS")
 
-  backup_file "$CMD_FILE" "$CMD_BAK_FILE" 
+  backup_file "$CMD_FILE" "$CMD_BAK_FILE"
 
-  add_new_entry "$CMD" "$TITLE" "$TAGS_STR" "$CMD_BAK_FILE" > "$CMD_FILE"
+  add_new_entry "$CMD" "$TITLE" "$TAGS_STR" "$CMD_BAK_FILE" >"$CMD_FILE"
 }
 
 main

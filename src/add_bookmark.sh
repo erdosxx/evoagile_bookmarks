@@ -36,10 +36,10 @@ main() {
   TAGS="$(get_input_tags)"
   TAGS_STR=$(gen_tags_str "$TAGS")
 
-  backup_file "$BOOKMARKS_FILE" "$BOOKMARKS_BAK_FILE" 
+  backup_file "$BOOKMARKS_FILE" "$BOOKMARKS_BAK_FILE"
 
   # echo "$(add_new_bookmark "$URL" "$TITLE" "$TAGS_STR" "$BOOKMARKS_BAK_FILE")" > "$BOOKMARKS_FILE"
-  add_new_entry "$URL" "$TITLE" "$TAGS_STR" "$BOOKMARKS_BAK_FILE" > "$BOOKMARKS_FILE"
+  add_new_entry "$URL" "$TITLE" "$TAGS_STR" "$BOOKMARKS_BAK_FILE" >"$BOOKMARKS_FILE"
 }
 
 main

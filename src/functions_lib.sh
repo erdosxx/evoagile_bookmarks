@@ -30,10 +30,10 @@ make_dmenu_selection() {
 
   if [[ -z "$PROMPT" ]]; then
     # echo "$LIST_DATA" | rofi -dmenu -i  "$LINES" "$FONT" "$COLORS"
-    echo "$LIST_DATA" | rofi -dmenu -i  -matching fuzzy "$LINES" "$COLORS"
+    echo "$LIST_DATA" | rofi -dmenu -i -matching fuzzy "$LINES" "$COLORS"
   else
     # echo "$LIST_DATA" | rofi -dmenu -i  "$LINES" "$FONT" "$COLORS" -p "$PROMPT"
-    echo "$LIST_DATA" | rofi -dmenu -i  -matching fuzzy "$LINES" "$COLORS" -p "$PROMPT"
+    echo "$LIST_DATA" | rofi -dmenu -i -matching fuzzy "$LINES" "$COLORS" -p "$PROMPT"
   fi
 }
 
@@ -130,7 +130,7 @@ get_input_title() {
 }
 
 get_input_tags() {
-  local TAGS 
+  local TAGS
   read -r -p "tags: " TAGS
   echo "$TAGS"
 }
@@ -159,12 +159,12 @@ to_lowercase() {
 }
 
 trim() {
-    local var="$*"
-    # remove leading whitespace characters
-    var="${var#"${var%%[![:space:]]*}"}"
-    # remove trailing whitespace characters
-    var="${var%"${var##*[![:space:]]}"}"
-    echo "$var"
+  local var="$*"
+  # remove leading whitespace characters
+  var="${var#"${var%%[![:space:]]*}"}"
+  # remove trailing whitespace characters
+  var="${var%"${var##*[![:space:]]}"}"
+  echo "$var"
 }
 
 gen_tags_str() {
@@ -173,7 +173,7 @@ gen_tags_str() {
   local OUT_STR=""
   local TAG
 
-  if [[ -z "$TAGS_STR" ]]; then 
+  if [[ -z "$TAGS_STR" ]]; then
     echo ""
   else
     TAGS_STR=$(trim "$TAGS_STR")
@@ -183,7 +183,7 @@ gen_tags_str() {
     TAGS_STR=${TAGS_STR%,}
     readarray -td, TAGS_ARRAY <<<"$TAGS_STR" # ; declare -p TAGS_ARRAY;
 
-    for (( i=0; i<${#TAGS_ARRAY[@]}; i++ )); do
+    for ((i = 0; i < ${#TAGS_ARRAY[@]}; i++)); do
       TAG=$(trim "${TAGS_ARRAY[i]}")
       OUT_STR="$OUT_STR"", \"""${TAG}""\""
     done
