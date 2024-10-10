@@ -23,5 +23,4 @@ main() {
   command_paste "$CMD"
 }
 
-BOOKMARKS_FILE="$HOME/.config/bookmarks/commands.yaml"
-main "${1:-"$BOOKMARKS_FILE"}"
+main "$1"

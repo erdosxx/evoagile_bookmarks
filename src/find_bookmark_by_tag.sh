@@ -34,5 +34,4 @@ main() {
   open_new_web_url "$URL"
 }
 
-BOOKMARKS_FILE="$HOME/.config/bookmarks/bookmarks.yaml"
-main "${1:-"$BOOKMARKS_FILE"}"
+main "$1"

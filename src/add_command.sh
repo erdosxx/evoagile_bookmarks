@@ -3,15 +3,14 @@
 SRC_DIR=$(dirname "$0")
 source "$SRC_DIR"/functions_lib.sh
 
-CMD_FILE="$HOME/.config/bookmarks/commands.yaml"
-CMD_BAK_FILE="$HOME/.config/bookmarks/commands.yaml.bak"
-
 main() {
   local CMD_INPUT
   local CMD
   local TITLE
   local TAGS
   local TAGS_STR
+  local CMD_FILE=${1:-$HOME/.config/bookmarks/commands.yaml}
+  local CMD_BAK_FILE=${2:-$HOME/.config/bookmarks/commands.yaml.bak}
 
   CMD="$(get_clip_str)"
   echo "CMD: $CMD"
@@ -45,4 +44,4 @@ main() {
   add_new_entry "$CMD" "$TITLE" "$TAGS_STR" "$CMD_BAK_FILE" >"$CMD_FILE"
 }
 
-main
+main "$1" "$2"

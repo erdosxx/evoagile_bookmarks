@@ -4,12 +4,11 @@ SRC_DIR=$(dirname "$0")
 source "$SRC_DIR"/functions_lib.sh
 
 main() {
+  local SEARCH_URL_FILE=${1:-$HOME/.config/bookmarks/search_url.yaml}
   local SEARCH_INPUT_STR
   SEARCH_INPUT_STR="$(get_clip_str)"
 
   SEARCH_STR=$(gen_search_str "$SEARCH_INPUT_STR")
-
-  local SEARCH_URL_FILE=${1:-$HOME/.config/bookmarks/search_url.yaml}
 
   local SEARCH_ENGINE_LIST
   SEARCH_ENGINE_LIST=$(get_title_list "$SEARCH_URL_FILE")
@@ -25,5 +24,4 @@ main() {
   open_new_web_url "$URL""$SEARCH_STR"
 }
 
-SEARCH_URL_FILE="$HOME/.config/bookmarks/search_url.yaml"
-main "${1:-"$SEARCH_URL_FILE"}"
+main "$1"

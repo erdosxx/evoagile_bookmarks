@@ -3,15 +3,14 @@
 SRC_DIR=$(dirname "$0")
 source "$SRC_DIR"/functions_lib.sh
 
-BOOKMARKS_FILE="$HOME/.config/bookmarks/bookmarks.yaml"
-BOOKMARKS_BAK_FILE="$HOME/.config/bookmarks/bookmarks.yaml.bak"
-
 main() {
   local URL_INPUT
   local URL
   local TITLE
   local TAGS
   local TAGS_STR
+  local BOOKMARKS_FILE=${1:-$HOME/.config/bookmarks/bookmarks.yaml}
+  local BOOKMARKS_BAK_FILE=${2:-$HOME/.config/bookmarks/bookmarks.yaml.bak}
 
   URL_INPUT="$(get_clip_str)"
   echo "URL: $URL_INPUT"
@@ -42,4 +41,4 @@ main() {
   add_new_entry "$URL" "$TITLE" "$TAGS_STR" "$BOOKMARKS_BAK_FILE" >"$BOOKMARKS_FILE"
 }
 
-main
+main "$1" "$2"
