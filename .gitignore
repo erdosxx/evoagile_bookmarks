@@ -1,1 +1,8 @@
 tests/test_helper/common-setup.bash
+
+# nixago: ignore-linked-files
+/lefthook.yml
+/.conform.yaml
+/treefmt.toml
+src/functions_lib.sh
+Justfile
