@@ -2,7 +2,8 @@
 let
   echo = "${nixpkgs.coreutils}/bin/echo";
   sleep = "${nixpkgs.coreutils}/bin/sleep";
-in nixpkgs.writeShellScriptBin "add_bookmark.sh" ''
+in
+nixpkgs.writeShellScriptBin "add_bookmark.sh" ''
   source ${functions_lib}/bin/functions_lib.sh
 
   main() {
@@ -11,8 +12,8 @@ in nixpkgs.writeShellScriptBin "add_bookmark.sh" ''
     local TITLE
     local TAGS
     local TAGS_STR
-    local BOOKMARKS_FILE=${"1:-$HOME/.config/bookmarks/bookmarks.yaml"}
-    local BOOKMARKS_BAK_FILE=${"2:-$HOME/.config/bookmarks/bookmarks.yaml.bak"}
+    local BOOKMARKS_FILE=''${"1:-$HOME/.config/bookmarks/bookmarks.yaml"}
+    local BOOKMARKS_BAK_FILE=''${"2:-$HOME/.config/bookmarks/bookmarks.yaml.bak"}
 
     URL_INPUT="$(get_clip_str)"
     ${echo} "URL: $URL_INPUT"
