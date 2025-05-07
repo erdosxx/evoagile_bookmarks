@@ -14,7 +14,8 @@ let
   xclip = getExe nixpkgs.xclip;
   xdotool = getExe nixpkgs.xdotool;
   yq = getExe nixpkgs.yq-go;
-in nixpkgs.writeShellScriptBin "functions_lib.sh" ''
+in
+nixpkgs.writeShellScriptBin "functions_lib.sh" ''
   get_title_list() {
     local YAML_FILE=$1
     local TITLE_LIST
@@ -243,6 +244,9 @@ in nixpkgs.writeShellScriptBin "functions_lib.sh" ''
 
     ${echo} -n "$CMD" | ${xclip} -selection clipboard
     # Alt+v should be paste command in terminal
-    ${xdotool} --clearmodifiers key Alt+v
+    # ${xdotool} key Alt+v
+    ${xdotool} keydown Alt
+    ${xdotool} key v
+    ${xdotool} keyup Alt
   }
 ''
