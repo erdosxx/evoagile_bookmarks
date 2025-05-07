@@ -18,7 +18,7 @@ in nixpkgs.writeShellScriptBin "functions_lib.sh" ''
   get_title_list() {
     local YAML_FILE=$1
     local TITLE_LIST
-  
+
     TITLE_LIST=$(${yq} '.[] | .title' "$YAML_FILE")
     ${echo} "$TITLE_LIST"
   }
@@ -28,7 +28,7 @@ in nixpkgs.writeShellScriptBin "functions_lib.sh" ''
   remove_head_tail_chars() {
     local STR=$1
     local CHAR=''${2:-\"}
-  
+
     local STR_TAIL="''${STR#"$CHAR"}"
     ${echo} "''${STR_TAIL%"$CHAR"}"
   }
@@ -36,12 +36,12 @@ in nixpkgs.writeShellScriptBin "functions_lib.sh" ''
   make_dmenu_selection() {
     local LIST_DATA=$1
     local PROMPT=$2
-  
+
     local LINES="-l 20"
     # Font is contralled by rofi config.rasi file
     # local FONT="-fn Inconsolata-16"
     local COLORS="-nb \#2C323E -nf \#9899a0 -sb \#BF616A -sf \#2C323E"
-  
+
     if [[ -z "$PROMPT" ]]; then
       # echo "$LIST_DATA" | rofi -dmenu -i  "$LINES" "$FONT" "$COLORS"
       ${echo} "$LIST_DATA" | ${rofi} -dmenu -i -matching fuzzy "$LINES" "$COLORS"
@@ -54,9 +54,9 @@ in nixpkgs.writeShellScriptBin "functions_lib.sh" ''
   find_url_by_title() {
     local TITLE=$1
     local BOOKMARKS_FILE=''${2:-$HOME/.config/bookmarks/bookmarks.yaml}
-  
+
     local SEARCH_CONDITION=".[] | select(.title == \"""$TITLE""\") | .url"
-  
+
     local URL_QUOT
     URL_QUOT=$(${yq} "$SEARCH_CONDITION" "$BOOKMARKS_FILE")
     remove_head_tail_chars "$URL_QUOT"
@@ -65,30 +65,30 @@ in nixpkgs.writeShellScriptBin "functions_lib.sh" ''
   get_num_url() {
     local URL=$1
     local BOOKMARKS_FILE=''${2:-$HOME/.config/bookmarks/bookmarks.yaml}
-  
+
     local SEARCH_CONDITION=".[] | select(.url == \"""$URL""\") | .url"
-  
+
     local URL_QUOT
     URL_QUOT=$(${yq} "$SEARCH_CONDITION" "$BOOKMARKS_FILE")
-  
+
     get_num_of_items "$URL_QUOT"
   }
 
   get_num_title() {
     local TITLE=$1
     local BOOKMARKS_FILE=''${2:-$HOME/.config/bookmarks/bookmarks.yaml}
-  
+
     local SEARCH_CONDITION=".[] | select(.title == \"""$TITLE""\") | .title"
-  
+
     local SEARCH_TITLE
     SEARCH_TITLE=$(${yq} "$SEARCH_CONDITION" "$BOOKMARKS_FILE")
-  
+
     get_num_of_items "$SEARCH_TITLE"
   }
 
   get_uniq_tags() {
     local BOOKMARKS_FILE=''${1:-$HOME/.config/bookmarks/bookmarks.yaml}
-  
+
     TAGS=$(${yq} '.[].tags[]' "$BOOKMARKS_FILE" | ${sort} | ${uniq})
     ${echo} "$TAGS"
   }
@@ -96,7 +96,7 @@ in nixpkgs.writeShellScriptBin "functions_lib.sh" ''
   get_title_list_by_tag() {
     local TAG=$1
     local BOOKMARKS_FILE=''${2:-$HOME/.config/bookmarks/bookmarks.yaml}
-  
+
     local SEARCH_CONDITION=".[] | select(.tags[] == \"""$TAG""\") | .title"
     local TITLE_LIST
     TITLE_LIST=$(${yq} "$SEARCH_CONDITION" "$BOOKMARKS_FILE")
@@ -106,7 +106,7 @@ in nixpkgs.writeShellScriptBin "functions_lib.sh" ''
   get_num_of_items() {
     local ITEMS=$1
     local NUM
-  
+
     [[ -z "$ITEMS" ]] && NUM="0" || NUM=$(${echo} "$ITEMS" | ${wc} -l)
     ${echo} "$NUM"
   }
@@ -126,7 +126,7 @@ in nixpkgs.writeShellScriptBin "functions_lib.sh" ''
 
   get_clip_str() {
     local STR
-  
+
     STR=$(${xclip} -o)
     ${echo} "$STR"
   }
@@ -134,20 +134,20 @@ in nixpkgs.writeShellScriptBin "functions_lib.sh" ''
   get_input_title() {
     local TITLE
     read -r -p "title(to abort 'q!'): " TITLE
-  
+
     ${echo} "$TITLE"
   }
-  
+
   get_input_tags() {
     local TAGS
     read -r -p "tags: " TAGS
     ${echo} "$TAGS"
   }
-  
+
   backup_file() {
     local SOURCE=$1
     local BACKUP_FILE=$2
-  
+
     ${cp} "$SOURCE" "$BACKUP_FILE"
   }
 
@@ -179,7 +179,7 @@ in nixpkgs.writeShellScriptBin "functions_lib.sh" ''
     local TAGS_ARRAY
     local OUT_STR=""
     local TAG
-  
+
     if [[ -z "$TAGS_STR" ]]; then
       ${echo} ""
     else
@@ -189,7 +189,7 @@ in nixpkgs.writeShellScriptBin "functions_lib.sh" ''
       # Remove tail ,
       TAGS_STR=''${TAGS_STR%,}
       readarray -td, TAGS_ARRAY <<<"$TAGS_STR" # ; declare -p TAGS_ARRAY;
-  
+
       for ((i = 0; i < ''${#TAGS_ARRAY[@]}; i++)); do
         TAG=$(trim "''${TAGS_ARRAY[i]}")
         OUT_STR="$OUT_STR"", \"""''${TAG}""\""
@@ -208,14 +208,14 @@ in nixpkgs.writeShellScriptBin "functions_lib.sh" ''
     local TITLE=$1
     local TAG=$2
     local BOOKMARKS_FILE=''${3:-$HOME/.config/bookmarks/bookmarks.yaml}
-  
+
     local SEARCH_CONDITION=".[] | select(.title == \"""$TITLE""\" and .tags[] == \"""$TAG""\") | .url"
-  
+
     local URL_QUOT
     URL_QUOT=$(${yq} "$SEARCH_CONDITION" "$BOOKMARKS_FILE")
     local URL
     URL=$(remove_head_tail_chars "$URL_QUOT")
-  
+
     [[ -z "$URL" ]] && ${echo} "no" || ${echo} "yes"
   }
 
@@ -228,7 +228,7 @@ in nixpkgs.writeShellScriptBin "functions_lib.sh" ''
 
   open_new_web_url() {
     local URL=$1
-  
+
     local OPEN_INPUT="o"
     ${xdotool} key Escape
     ${xdotool} type "$OPEN_INPUT"
@@ -240,9 +240,9 @@ in nixpkgs.writeShellScriptBin "functions_lib.sh" ''
 
   command_paste() {
     local CMD=$1
-  
+
     ${echo} -n "$CMD" | ${xclip} -selection clipboard
     # Alt+v should be paste command in terminal
-    ${xdotool} key Alt+v
+    ${xdotool} --clearmodifiers key Alt+v
   }
 ''
