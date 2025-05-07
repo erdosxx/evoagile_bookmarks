@@ -244,6 +244,8 @@ nixpkgs.writeShellScriptBin "functions_lib.sh" ''
 
     ${echo} -n "$CMD" | ${xclip} -selection clipboard
     # Alt+v should be paste command in terminal
+    # When scroll up and down with Alt+j,k
+    # still remain Alt key. So release it.
     ${xdotool} keyup Alt
     ${xdotool} key Alt+v
   }
