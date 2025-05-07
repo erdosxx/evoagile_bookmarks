@@ -244,9 +244,7 @@ nixpkgs.writeShellScriptBin "functions_lib.sh" ''
 
     ${echo} -n "$CMD" | ${xclip} -selection clipboard
     # Alt+v should be paste command in terminal
-    # ${xdotool} key Alt+v
-    ${xdotool} keydown Alt
-    ${xdotool} key v
     ${xdotool} keyup Alt
+    ${xdotool} key Alt+v
   }
 ''
