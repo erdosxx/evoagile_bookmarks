@@ -22,6 +22,7 @@ let
       jq
       yq-go
       bc
+      treefmt
     ];
   };
 
@@ -48,7 +49,8 @@ let
 
   functions_lib =
     nixpkgs.callPackage (self + /src/functions_lib.nix) { inherit nixpkgs; };
-in l.mapAttrs (_: mkShell) {
+in
+l.mapAttrs (_: mkShell) {
   default = { ... }: {
     name = "bookmarks devshell";
 

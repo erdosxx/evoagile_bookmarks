@@ -1,6 +1,7 @@
 {
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable-small";
+    # nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable-small";
+    nixpkgs.url = "github:nixos/nixpkgs/d61e20866f3c1ec3cdedaf34be0f3ab76e4bba71";
     std = {
       url = "github:divnix/std";
       inputs = {
@@ -17,18 +18,28 @@
     };
   };
 
-  outputs = { std, ... }@inputs:
-    std.growOn {
-      inherit inputs;
-      cellsFrom = ./nix;
-      cellBlocks = with std.blockTypes; [
-        (runnables "apps")
-        (devshells "devshells")
-        # (functions "toolchain")
-        (nixago "configs")
-      ];
-    } {
-      packages = std.harvest inputs.self [[ "bookmarks" "apps" ]];
-      devShells = std.harvest inputs.self [ "bookmarks" "devshells" ];
-    };
+  outputs = { std, ... } @ inputs:
+    std.growOn
+      {
+        inherit inputs;
+        cellsFrom = ./nix;
+        cellBlocks = with std.blockTypes; [
+          (runnables "apps")
+          (devshells "devshells")
+          # (functions "toolchain")
+          (nixago "configs")
+        ];
+      }
+      {
+        packages = std.harvest inputs.self [
+          [
+            "bookmarks"
+            "apps"
+          ]
+        ];
+        devShells = std.harvest inputs.self [
+          "bookmarks"
+          "devshells"
+        ];
+      };
 }
